@@ -1,6 +1,23 @@
 %p#notice= notice
+%legend Viewing Climber
 
-
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+.col-lg-6
+  %h3
+    = @user.name
+    = link_to 'Edit', edit_user_path(@user), :class => "btn btn-info"
+  .panel.panel-info
+    .panel-heading
+      %h4.panel-info-title About
+    .panel-body
+      %p= @user.about
+%br
+.container
+.col-lg-6
+  .panel.panel-info
+    .panel-heading
+      %h4.panel-info-title Climbs
+    .panel-body
+      %p= @user.routes
+%br
+.col-lg-10
+  = link_to 'Back', users_path, :class => "btn btn-default"

@@ -6,4 +6,35 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = yield
+    .navbar.navbar-inverse
+      .navbar-header
+        %button.navbar-toggle{"data-target" => ".navbar-inverse-collapse", "data-toggle" => "collapse", type: "button"}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand{href: "/users"} Home
+      .navbar-collapse.collapse.navbar-inverse-collapse
+        %ul.nav.navbar-nav
+          %li
+            = link_to "Leaderboard", users_path
+          %li
+            = link_to "See All Routes", routes_path
+          %li
+            = link_to "Locations", locations_path
+        %form.navbar-form.navbar-left
+          %input.form-control.col-lg-8{placeholder: "Search", type: "text"}/
+        %ul.nav.navbar-nav.navbar-right
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+              Direct Add
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{href: "/users/new"} Add a Climber
+              %li
+                %a{href: "/locations/new"} Add a Location
+              %li
+                %a{href: "/routes/new"} Add a Route
+%br
+.container
+  = yield

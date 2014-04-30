@@ -6,5 +6,28 @@
         - @route.errors.full_messages.each do |msg|
           %li= msg
 
-  .actions
-    = f.submit 'Save'
+  .form-horizontal
+    .fieldset
+      .form-group
+        .col-lg-10
+          .form-group
+            = f.label :name, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :name, :class => "form-control"
+          .form-group
+            = f.label :grade, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :grade, :class => "form-control"
+          .form-group
+            = f.label :beta, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :beta, :class => "form-control"
+          .form-group
+            .radio
+              = f.label :location_id, :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.text_field :location_id, :class => "form-control"
+          .actions
+            .form-group
+              .col-lg-10.col-lg-offset-2
+                = f.submit 'Save', :class => "btn btn-primary"

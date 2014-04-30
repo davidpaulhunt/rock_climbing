@@ -1,21 +1,31 @@
-%h1 Listing users
+%h1 Climbers
 
-%table.table-striped.table-hover
-  %thead
-    %tr
-      %th Name
-      %th About
-      %th Contact
-  %tbody
-  - @users.each do |user|
-    %tr
-      %td= user.name
-      %td= user.about
-      %td= user.contact
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+- @users.each do |user|
+  %ul.nav.nav-tabs{style: "margin-bottom: 15px;"}
+    %li
+      %a{"data-toggle" => "tab", href: "#about#{user.id}"} About
+    %li
+      %a{"data-toggle" => "tab", href: "#routes_climbed#{user.id}"} Routes Climbed
+    %li.dropdown
+      %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+        Actions
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          = link_to 'Show', user
+        %li
+          = link_to 'Edit', edit_user_path(user)
+        %li.divider
+        %li
+          = link_to 'Delete', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  .tab-content{:id => "myTabContent#{user.id}"}
+    .tab-pane.fade.active.in{:id => "about#{user.id}"}
+      %p= "Name: " + user.name
+      %p= "About: " + user.about
+      %p= "Contact: " + user.contact
+    .tab-pane.fade{:id => "routes_climbed#{user.id}"}
+      %p This will eventually be a list of routes climbed.
+  %br
+  %br
 
-%br
-
-= link_to 'New User', new_user_path
+= link_to 'Add a Climber', new_user_path, :class => "btn btn-success"

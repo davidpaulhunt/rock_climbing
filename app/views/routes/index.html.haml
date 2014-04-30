@@ -1,17 +1,23 @@
-%h1 Listing routes
+%h1 All Routes
 
-%table
-  %tr
-    %th
-    %th
-    %th
-
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Grade
+      %th Beta
+      %th Location ID
+  %tbody
   - @routes.each do |route|
     %tr
-      %td= link_to 'Show', route
-      %td= link_to 'Edit', edit_route_path(route)
-      %td= link_to 'Destroy', route, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= route.name
+      %td= route.grade
+      %td= route.beta
+      %td= route.location_id
+      %td= link_to 'Show', route, :class => "btn btn-info"
+      %td= link_to 'Edit', edit_route_path(route), :class => "btn btn-info"
+      %td= link_to 'Destroy', route, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-danger"
 
 %br
 
-= link_to 'New Route', new_route_path
+= link_to 'New Route', new_route_path, :class => "btn btn-success"

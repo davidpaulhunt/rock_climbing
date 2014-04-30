@@ -1,17 +1,26 @@
-%h1 Listing locations
+%h1 All Locations
 
-%table
-  %tr
-    %th
-    %th
-    %th
-
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th Name
+      %th Rock Type
+      %th Location
+      %th Has Camping?
+  %tbody
   - @locations.each do |location|
     %tr
-      %td= link_to 'Show', location
-      %td= link_to 'Edit', edit_location_path(location)
-      %td= link_to 'Destroy', location, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= location.name
+      %td= location.rock_type
+      %td= location.location
+      - if location.camping
+        %td Yes
+      - else
+        %td No
+      %td= link_to 'Show', location, :class => "btn btn-info"
+      %td= link_to 'Edit', edit_location_path(location), :class => "btn btn-info"
+      %td= link_to 'Destroy', location, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-danger"
 
 %br
 
-= link_to 'New Location', new_location_path
+= link_to 'New Location', new_location_path, :class => "btn btn-success"

@@ -1,10 +1,52 @@
-= form_for @location do |f|
+= form_for(add_routes_to_location(@location)) do |f|
   - if @location.errors.any?
     #error_explanation
       %h2= "#{pluralize(@location.errors.count, "error")} prohibited this location from being saved:"
       %ul
         - @location.errors.full_messages.each do |msg|
           %li= msg
-
-  .actions
-    = f.submit 'Save'
+  .form-horizontal
+    .fieldset
+      .form-group
+        .col-lg-10
+          .form-group
+            = f.label :name, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :name, :class => "form-control"
+          .form-group
+            = f.label :rock_type, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_area :rock_type, :class => "form-control"
+          .form-group
+            = f.label :location, :class => "col-lg-2 control-label"
+            .col-lg-10
+              = f.text_field :location, :class => "form-control"
+          .form-group
+            .radio
+              = f.label "Camping?", :class => "col-lg-2 control-label"
+              .col-lg-10
+                = f.check_box :camping
+          %br
+          / - unless @location.routes.count > 0
+          .container
+            .form-group
+              .col-lg-2
+              .col-lg-6
+                %legend Include a New Route
+                = f.fields_for :routes do |ff|
+                  .form-group
+                    = ff.label :name, :class => "col-lg-2 control-label"
+                    .col-lg-10
+                      = ff.text_field :name, :class => "form-control"
+                  .form-group
+                    = ff.label :grade, :class => "col-lg-2 control-label"
+                    .col-lg-10
+                      = ff.text_field :grade, :class => "form-control"
+                  .form-group
+                    = ff.label :beta, :class => "col-lg-2 control-label"
+                    .col-lg-10
+                      = ff.text_field :beta, :class => "form-control"
+          .actions
+            .form-group
+              .col-lg-10.col-lg-offset-2
+                = f.submit 'Save', :class => "btn btn-primary"
