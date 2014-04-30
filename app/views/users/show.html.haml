@@ -17,7 +17,8 @@
     .panel-heading
       %h4.panel-info-title Climbs
     .panel-body
-      %p= @user.routes
+      - @user.attempts.each do |a|
+        %p= "#{a.id}. #{a.date_attempted}"
 %br
 .col-lg-10
   = link_to 'Back', users_path, :class => "btn btn-default"

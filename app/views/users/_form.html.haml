@@ -1,4 +1,4 @@
-= form_for @user do |f|
+= form_for(add_attempts_to_user(@user)) do |f|
   - if @user.errors.any?
     #error_explanation
       %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
@@ -21,6 +21,29 @@
             = f.label :contact, :class => "col-lg-2 control-label"
             .col-lg-10
               = f.text_field :contact, :class => "form-control"
+          %br
+          .container
+            .form-group
+              .col-lg-2
+              .col-lg-6
+                %legend Add an Attempt
+                = f.fields_for :attempts do |ff|
+                  .form-group
+                    = ff.label "Route", :class => "col-lg-2 control-label"
+                    .col-lg-10
+                      = ff.select :route_id, Route.all.collect { |r| [r.name, r.id] }, { include_blank: true }, :class => "form-control"
+                  .form-group
+                    = ff.label "Attempted on", :class => "col-lg-2 control-label"
+                    .col-lg-10
+                      = ff.date_select :date_attempted, :class => "form-control", include_blank: true
+                  .form-group
+                    = ff.label "Completed?", :class => "col-lg-2 control-label"
+                    .col-lg-10
+                      = ff.check_box :completed
+                  .form-group
+                    = ff.label "Notes", :class => "col-lg-2 control-label"
+                    .col-lg-10
+                      = ff.text_area :notes, :class => "form-control"
           .actions
             .form-group
               .col-lg-10.col-lg-offset-2

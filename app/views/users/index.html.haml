@@ -3,7 +3,7 @@
 - @users.each do |user|
   %ul.nav.nav-tabs{style: "margin-bottom: 15px;"}
     %li
-      %a{"data-toggle" => "tab", href: "#about#{user.id}"} About
+      %a{"data-toggle" => "tab", href: "#about#{user.id}"}= user.name
     %li
       %a{"data-toggle" => "tab", href: "#routes_climbed#{user.id}"} Routes Climbed
     %li.dropdown
@@ -20,11 +20,15 @@
           = link_to 'Delete', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
   .tab-content{:id => "myTabContent#{user.id}"}
     .tab-pane.fade.active.in{:id => "about#{user.id}"}
-      %p= "Name: " + user.name
-      %p= "About: " + user.about
-      %p= "Contact: " + user.contact
+      %blockquote
+        %p= user.about
+        %small= "Contact #{user.name}: #{user.contact}"
     .tab-pane.fade{:id => "routes_climbed#{user.id}"}
-      %p This will eventually be a list of routes climbed.
+      - if user.routes.empty?
+        %p= "#{user.name} hasn't attempted any climbs yet!"
+      - else
+        - user.routes.each do |r|
+          %p= r.name
   %br
   %br
 
